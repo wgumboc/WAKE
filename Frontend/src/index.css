@@ -16,6 +16,7 @@
 
 }
 
+
 .h2 {
   display: block;
   font-size: 2em;
@@ -29,4 +30,13 @@
 
 .h3 {
   text-align: left;
+
+.question-title {
+    display: flex;
+    justify-content: left;
+}
+
+.cursor-pointer {
+    display: flex;
+    justify-content: left;
 }
