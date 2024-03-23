@@ -17,6 +17,11 @@
 }
 
 .question-title {
-    display:flex;
+    display: flex;
+    justify-content: left;
+}
+
+.cursor-pointer {
+    display: flex;
     justify-content: left;
 }
