@@ -5,8 +5,8 @@ const Question1 = () => {
     <div className="w-full">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title">Question 1</h2>
-          <p className="question-title">Put your question HERE.</p>
+          <h2 className="h2">Question 1</h2>
+          <h3 className="h3">Put your question HERE.</h3>
 
           <div className="form-control">
             <label className="label cursor-pointer">
