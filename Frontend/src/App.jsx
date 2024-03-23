@@ -55,10 +55,14 @@ function App() {
         {q4 && <Question4/>}
         <div>
           <div className="join">
-            <button onClick={() => selectQ1()} className="join-item btn">1</button>
-            <button onClick={() => selectQ2()} className="join-item btn btn-active">2</button>
-            <button onClick={() => selectQ3()} className="join-item btn">3</button>
-            <button onClick={() => selectQ4()} className="join-item btn">4</button>
+            <button onClick={() => selectQ1()}
+                    className={q1 === true ? "join-item btn btn-active" : "join-item btn"}>1</button>
+            <button onClick={() => selectQ2()}
+                    className={q2 === true ? "join-item btn btn-active" : "join-item btn"}>2</button>
+            <button onClick={() => selectQ3()}
+                    className={q3 === true ? "join-item btn btn-active" : "join-item btn"}>3</button>
+            <button onClick={() => selectQ4()}
+                    className={q4 === true ? "join-item btn btn-active" : "join-item btn"}>4</button>
           </div>
         </div>
       </div>
