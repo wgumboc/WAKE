@@ -30,6 +30,7 @@
 
 .h3 {
   text-align: left;
+}
 
 .question-title {
     display: flex;
@@ -39,4 +40,5 @@
 .cursor-pointer {
     display: flex;
     justify-content: left;
+    gap: 20px;
 }
