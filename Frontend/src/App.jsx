@@ -11,9 +11,9 @@ import Question4 from './components/Question4.jsx';
 function App() {
   const [count, setCount] = useState(0)
 
-  const[q1, setQ1] = useState(true);
+  const[q1, setQ1] = useState(false);
   const[q2, setQ2] = useState(false);
-  const[q3, setQ3] = useState(false);
+  const[q3, setQ3] = useState(true);
   const[q4, setQ4] = useState(false);
 
   function selectQ1() {
