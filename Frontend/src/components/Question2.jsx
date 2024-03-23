@@ -37,10 +37,6 @@ const Question2 = () => {
           </div>
         </div>
       </div>
-      
-    
-  <div className="divider"></div> 
-      <button className="btn">Save and Grade</button>
 </div>
     
   )
