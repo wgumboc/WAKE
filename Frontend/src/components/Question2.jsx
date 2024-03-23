@@ -16,20 +16,20 @@ const Question2 = () => {
       </div>
       <div className="form-control">
         <label className="label cursor-pointer">
+        <input type="radio" name="radio-10" className="radio radio-primary" />
         <span className="label-text">Happier</span> 
-        <input type="radio" name="radio-10" className="radio radio-primary" />
         </label>
       </div>
       <div className="form-control">
         <label className="label cursor-pointer">
+        <input type="radio" name="radio-10" className="radio radio-primary" />
         <span className="label-text">Happy</span> 
-        <input type="radio" name="radio-10" className="radio radio-primary" />
         </label>
       </div>
       <div className="form-control">
         <label className="label cursor-pointer">
-        <span className="label-text">Unhappy</span> 
         <input type="radio" name="radio-10" className="radio radio-primary" />
+        <span className="label-text">Unhappy</span> 
         </label>
       </div>
           <div className="card-actions justify-end">
