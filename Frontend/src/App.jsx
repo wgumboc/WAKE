@@ -57,9 +57,9 @@ function App() {
   }
 
   return (
-    <>
+    <div className="">
       <div className="app-container">
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
         {q1 && <Question1/>}
         {q2 && <Question2/>}
         {q3 && <Question3/>}
@@ -80,7 +80,7 @@ function App() {
         </div>
         <button onClick={() => selectCam()} className="btn">See my face!</button>
       </div>
-    </>
+    </div>
   )
 }
 
