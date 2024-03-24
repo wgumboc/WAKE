@@ -21,7 +21,7 @@ const options = {
   outputFacialTransformationMatrixes: true,
 }
 
-const Cam = () => {
+const Cam = ({currEmotions}) => {
 
   const [mouthSmileLeft, setMouthSmileLeft] = useState(0);
   const [mouthPucker, setMouthPucker] = useState(0);
@@ -71,6 +71,7 @@ const Cam = () => {
         setEyeSquintLeft(shape.score)
       }
     })
+    currEmotions([mouthSmileLeft])
   }
 
   useEffect(() => {
@@ -78,12 +79,12 @@ const Cam = () => {
   }, []);
 
   return (
-    <div className="App">
-      <video className='camera-feed' id="video" autoPlay></video>
+    <div className="cam">
+      <video hidden={true} className='camera-feed' id="video" autoPlay></video>
       <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
       <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
       <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
-      {eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}
+      {/*{eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}*/}
     </div>
   );
 }
