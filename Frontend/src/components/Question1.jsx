@@ -24,9 +24,9 @@ const Question1 = ({updateProgress, mouthPucker}) => {
     <div className="w-full flex justify-between pt-24">
      
 
-        <div className="flex flex-col">
+        <div className="flex flex-col mr-20">
           <h2 className="h2 text-base-100 text-center">Question 1</h2>
-          <h3 className="h3 text-base-100">What is the answer?</h3>
+          <h3 className="h3 text-base-100">Researchers have found that students who wear yellow socks during exams score 10% higher on average, due to yellow's mood-boosting effects that enhance cognitive performance.</h3>
         </div>
 
 

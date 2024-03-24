@@ -4,9 +4,9 @@ const Question2 = ({updateProgress}) => {
   return (
     <div className="w-full flex justify-between pt-24">
      
-    <div className="flex flex-col">
+    <div className="flex flex-col mr-20">
       <h2 className="h2 text-base-100 text-center">Question 2</h2>
-      <h3 className="h3 text-base-100">Choose a word</h3>
+      <h3 className="h3 text-base-100">In an innovative study, researchers claim to have found a novel way to boost test scores. According to their findings, which of the following unusual strategies can improve a student’s exam performance by up to 20%?</h3>
     </div>
 
 
@@ -15,22 +15,22 @@ const Question2 = ({updateProgress}) => {
       <div className="form-control">
         <label className="label cursor-pointer pr-10 pt-10">
          <input type="checkbox" className="checkbox checkbox-primary" />
-          <span className="option label-text text-primary">Happiest</span> 
+          <span className="option label-text text-primary">Wearing a superhero costume to invoke heroic confidence.</span> 
         </label>
     
         <label className="label cursor-pointer pr-10 pt-10">
           <input type="checkbox" className="checkbox checkbox-primary" />
-          <span className="option label-text text-primary">Happyier</span> 
+          <span className="option label-text text-primary"> Taking the test in a room filled with the scent of lavender to reduce exam stress.</span> 
         </label>
 
         <label className="label cursor-pointer pr-10 pt-10">
           <input type="checkbox" className="checkbox checkbox-primary" />
-          <span className="option label-text text-primary">Happy</span> 
+          <span className="option label-text text-primary">Studying in a room with no windows to minimize distractions.</span> 
         </label>
     
         <label className="label cursor-pointer pr-10 pt-10">
           <input type="checkbox" className="checkbox checkbox-primary" />
-          <span className="option label-text text-primary">Happyish</span> 
+          <span className="option label-text text-primary">Reciting positive affirmations in front of a mirror for five minutes before the exam.</span> 
         </label>
 
 
