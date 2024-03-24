@@ -105,3 +105,24 @@ body {
 .btn {
     transition: 0.2s;
 }
+
+.emotion-color {
+    display: flex;
+    height: 16px;
+    align-items: center;
+    background-color: #9fedfa;
+}
+
+.emotion-label {
+    display: flex;
+    width: 120px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.emotion-bar {
+    display: flex;
+    align-items: center;
+    height: 20px;
+}

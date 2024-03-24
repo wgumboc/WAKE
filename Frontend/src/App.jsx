@@ -5,6 +5,7 @@ import Question2 from './components/Question2.jsx';
 import Question3 from './components/Question3.jsx';
 import Question4 from "./components/Question4.jsx";
 import {FaceLandmarker, FilesetResolver} from "@mediapipe/tasks-vision";
+import StAIve from "./components/StAIve.jsx";
 
 
 
@@ -91,6 +92,7 @@ function App() {
   }
 
   const updateEmotions = (blendshapes) => {
+    console.log(blendshapes)
     blendshapes.forEach(shape => {
       if (shape.categoryName === "mouthSmileLeft") {
         setMouthSmileLeft(shape.score)
@@ -118,9 +120,21 @@ function App() {
 
     if (eyeSquintLeft > 0.6 && mouthSmileLeft < 0.3) {
       initAudio();
+      // document.getElementById('staive').close()
+      // document.getElementById('wakeup').showModal()
     } else {
       pauseAudio();
+      // document.getElementById('wakeup').close()
     }
+
+    if ((mouthPucker > 0.5 || browDownLeft > 0.3) && !cam) {
+      document.getElementById('staive').showModal()
+    }
+
+    if (mouthSmileLeft > 0.8) {
+      document.getElementById('staive').close()
+    }
+
   }, [eyeSquintLeft, isSetUp]);
 
   const update = (saveNum) => {
@@ -188,7 +202,13 @@ function App() {
   }
 
   function selectCam() {
-    showHideCam(true);
+    if (!cam) {
+      document.getElementById('my_modal_2').showModal()
+      showHideCam(true);
+    } else {
+      document.getElementById('my_modal_2').close()
+      showHideCam(false);
+    }
   }
 
   return (
@@ -219,24 +239,42 @@ function App() {
           </div>
         </div>
 
-
+        <StAIve/>
 
         <div className="see-my-face-btn cam">
           <button className="btn" onClick={()=> {
             selectCam()
-            document.getElementById('my_modal_2').showModal()
             }}>Diagnostics</button>
           <dialog id="my_modal_2" className="modal">
             <div className="modal-box">
               <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
-              <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
-              <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
-              <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
-              <div>{"Stressed: " + browDownLeft.toFixed(3)}</div>
-              {/*{eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}*/}
+              <div className="emotion-bar">
+                <span className="emotion-label">{"Smiling: " + mouthSmileLeft.toFixed(3)}</span>
+                <span className="emotion-color" style={{
+                  width: `calc(${mouthSmileLeft * 100}% - 120px)`
+                }}></span>
+              </div>
+              <div className="emotion-bar">
+                <span className="emotion-label">{"Sad: " + mouthPucker.toFixed(3)}</span>
+                <span className="emotion-color" style={{
+                  width: `calc(${mouthPucker * 100}% - 120px)`
+                }}></span>
+              </div>
+              <div className="emotion-bar">
+                <span className="emotion-label">{"Tired: " + eyeSquintLeft.toFixed(3)}</span>
+                <span className="emotion-color" style={{
+                  width: `calc(${eyeSquintLeft * 100}% - 120px)`
+                }}></span>
+              </div>
+              <div className="emotion-bar">
+                <span className="emotion-label">{"Stressed: " + browDownLeft.toFixed(3)}</span>
+                <span className="emotion-color" style={{
+                  width: `calc(${browDownLeft * 100}% - 120px)`
+                }}></span>
+              </div>
             </div>
             <form method="dialog" className="modal-backdrop">
-              <button>close</button>
+              <button onClick={() => {selectCam()}}>close</button>
             </form>
           </dialog>
         </div>
