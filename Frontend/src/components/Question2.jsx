@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-
-const Question2 = () => {
+const Question2 = ({updateProgress}) => {
   return (
     <div className="w-full flex justify-between pt-24">
      
@@ -37,7 +36,7 @@ const Question2 = () => {
 
 
         <div className="card-actions justify-end">
-          <button className="btn btn-lg btn-warning float-right">Save</button>
+          <button className="btn btn-lg btn-warning float-right" onClick={() => updateProgress("save2")}>Save</button>
         </div>
       </div>
 

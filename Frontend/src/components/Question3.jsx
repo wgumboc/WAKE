@@ -1,7 +1,8 @@
-import React from 'react'
 
+import React, {useState} from 'react'
+import '.././App.css'
 
-const Question3 = () => {
+const Question3 = ({updateProgress}) => {
   return (
     <div className="w-full flex justify-between pt-24"> 
 
@@ -14,7 +15,7 @@ const Question3 = () => {
         <div className="card-body">
           <textarea className="textarea textarea-bordered w-full min-h-80" placeholder="Answer question here"></textarea>
           <div className="card-actions justify-end">
-            <button className="btn btn-lg btn-warning">Save</button>
+            <button className="btn btn-lg btn-warning" onClick={() => updateProgress("save3")}>Save</button>
           </div>
         </div>
       </div>
