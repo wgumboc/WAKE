@@ -17,12 +17,14 @@ function App() {
   const[progess, setProgress] = useState(0);
 
   const[save1, setSave1] = useState(false);
+  const[save2, setSave2] = useState(false);
+  const[save3, setSave3] = useState(false);
 
   const update = (saveNum) => {
     if (saveNum === "save1" && !save1) {
       setProgress(progress => progress + 25);
       setSave1(true);
-    }
+    } 
     if (saveNum === "save2" && !save2) {
       setProgress(progress => progress + 25);
       setSave2(true);
