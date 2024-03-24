@@ -2,21 +2,6 @@ import React, {useState} from 'react'
 
 const Question1 = ({updateProgress}) => {
 
-<<<<<<< HEAD
-=======
-  const[q1, setQ1] = useState(false);
-
-  function update() {
-    if (q1 === true) {
-      console.log("hi");
-    } else {
-      updateProgress(25);
-      setQ1(true);
-    }
-
-  }
->>>>>>> 2fc302bc2376d16196971acb40da5aefb3f430e3
-
   return (
     <div className="w-full">
       <div className="card bg-base-100 shadow-xl">
