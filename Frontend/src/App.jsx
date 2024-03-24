@@ -183,22 +183,17 @@ function App() {
 
  
         {cam && <Cam/>}
+
+
         <div className="mt-3 pagination-container flex">
+        
+        
         {isDone && <button className="btn mb-3 ml-6 w-fit btn-lg btn-warning">Submit</button>}
 
-        <progress className="progress progress-secondary w-full" value={progess} max="100">
-        </progress>
+  
 
-        {/*Camera Component*/}
-        <div className="cam">
-          <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
-          <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
-          <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
-          <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
-          {eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}
-        </div>
-        <div>
 
+        
           <div className="join">
             <button onClick={() => selectQ1()}
                     className={q1 === true ? "join-item btn btn-active" : "join-item btn"}>1</button>
@@ -209,16 +204,28 @@ function App() {
             <button onClick={() => selectQ4()}
                     className={q4 === true ? "join-item btn btn-active" : "join-item btn"}>4</button>
           </div>
-          
-        </div>
+       
 
-        <button onClick={() => selectCam()} className="see-my-face-btn btn w-fit">See my face!</button>
+      
 
         
       </div>
 
+      <div className="see-my-face-btn">
+          <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
+          <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
+          <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
+          <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
+          {eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}
+
+          <button onClick={() => selectCam()} className="btn w-fit">See my face!</button>
+        </div>
+
+     
+
       
 
+    </div>
     </div>
   )
 }
