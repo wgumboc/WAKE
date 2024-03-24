@@ -14,10 +14,10 @@ function App() {
   const[q3, setQ3] = useState(true);
   const[q4, setQ4] = useState(false);
 
-  const[progess, setProgress] = useState(0)
+  const[progess, setProgress] = useState(0);
 
   const update = (x) => {
-    setProgress(x);
+    setProgress(progress => progress + 25);
     console.log("hello");
   } 
 

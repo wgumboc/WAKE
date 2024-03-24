@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Question2 = ({updateProgress}) => {
 
+  const[q2, setQ2] = useState(false);
+
   function update() {
-    updateProgress(25);
+    if (q2 === true) {
+      console.log("hi");
+    } else {
+      updateProgress(25);
+      setQ2(true);
+    }
+    //updateProgress(25);
   }
 
   return (
