@@ -135,7 +135,8 @@ function App() {
     }
 
     if ((mouthPucker > 0.5 || browDownLeft > 0.3) && !cam && !isDone) {
-      document.getElementById('staive').showModal()
+      document.getElementById('staive').showModal();
+      const btn = document.getElementById('')
     }
 
     if (mouthSmileLeft > 0.8) {
@@ -196,6 +197,39 @@ function App() {
       setIsDone(true);
     }
   }
+  
+
+  const moveSubBtn = () => {
+      
+    const submitButton = document.getElementById("submitBtn");
+
+      if (submitButton) {
+        let x = Math.random() * (window.innerWidth - submitButton.offsetWidth);
+        let y = Math.random() * (window.innerHeight - submitButton.offsetHeight);
+
+        submitButton.style.position = 'absolute';
+        submitButton.style.left = `${x}px`;
+        submitButton.style.top = `${y}px`;
+      }
+  }
+
+  useEffect( () => {
+    const submitButton = document.getElementById("submitBtn");
+
+    if (submitButton && (mouthPucker > 0.5 || browDownLeft > 0.3) && !cam && isDone) {
+        submitButton.addEventListener('click', moveSubBtn);
+      submitButton.addEventListener('mouseenter', moveSubBtn);
+
+    return () => {
+      const submitButton = document.getElementById("submitBtn");
+
+      if (submitButton) {
+        submitButton.addEventListener('click', moveSubBtn);
+        submitButton.addEventListener('mouseenter', moveSubBtn);
+      }
+    };
+  }
+  })
 
 
   function selectQ1() {
@@ -263,7 +297,7 @@ function App() {
           <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></source>
         </audio>
         <div className="mt-3 pagination-container flex">
-          {isDone && <button className="btn mb-3 ml-6 w-fit btn-lg btn-warning"
+          {isDone && <button id="submitBtn" className="btn mb-3 ml-6 w-fit btn-lg btn-warning"
                              onClick={showFinalEmotions}>Submit</button>}
 
           <div className="join">

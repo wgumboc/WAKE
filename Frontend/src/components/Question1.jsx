@@ -20,6 +20,8 @@ const Question1 = ({updateProgress, mouthPucker}) => {
   //   position: 1 < 8 && "absolute",
   // };
 
+
+
   return (
     <div className="w-full flex justify-between pt-24">
      
@@ -49,8 +51,11 @@ const Question1 = ({updateProgress, mouthPucker}) => {
               {/*        onClick={() => updateProgress("save1")}*/}
               {/*        onMouseOver={mouseOver}*/}
               {/*        style={mystyle}>Save</button>*/}
-              <button className="btn btn-lg btn-warning float-right"
-                      onClick={() => updateProgress("save1")}>Save</button>
+              <button id="q1btn" className="btn btn-lg btn-warning float-right" 
+                      onClick={(e) => {
+                        updateProgress("save1");
+                        console.log(e.target.id);
+                      }}>Save</button>
             </div>
           </div>
           </div>
