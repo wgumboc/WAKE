@@ -6,6 +6,7 @@ import Question3 from './components/Question3.jsx';
 import Question4 from "./components/Question4.jsx";
 import {FaceLandmarker, FilesetResolver} from "@mediapipe/tasks-vision";
 import StAIve from "./components/StAIve.jsx";
+import Pie from "./components/Pie.jsx";
 
 
 
@@ -59,6 +60,11 @@ function App() {
   const [eyeSquintLeft, setEyeSquintLeft] = useState(0);
   const [browDownLeft, setBrowDownLeft] = useState(0);
 
+  const [happyTally, setHappyTally] = useState(0);
+  const [sadTally, setSadTally] = useState(0);
+  const [tiredTally, setTiredTally] = useState(0);
+  const [stressedTally, setStressedTally] = useState(0);
+
   const[isSetUp, setIsSetUp] = useState(false);
 
   const setup = async () => {
@@ -92,24 +98,25 @@ function App() {
   }
 
   const updateEmotions = (blendshapes) => {
-    console.log(blendshapes)
-    blendshapes.forEach(shape => {
-      if (shape.categoryName === "mouthSmileLeft") {
-        setMouthSmileLeft(shape.score)
-      }
+    if (!isDone) {
+      blendshapes.forEach(shape => {
+        if (shape.categoryName === "mouthSmileLeft") {
+          setMouthSmileLeft(shape.score)
+        }
 
-      if (shape.categoryName === "mouthPucker") {
-        setMouthPucker(shape.score)
-      }
+        if (shape.categoryName === "mouthPucker") {
+          setMouthPucker(shape.score)
+        }
 
-      if (shape.categoryName === "eyeSquintLeft") {
-        setEyeSquintLeft(shape.score)
-      }
+        if (shape.categoryName === "eyeSquintLeft") {
+          setEyeSquintLeft(shape.score)
+        }
 
-      if (shape.categoryName === "browDownLeft") {
-        setBrowDownLeft(shape.score)
-      }
-    })
+        if (shape.categoryName === "browDownLeft") {
+          setBrowDownLeft(shape.score)
+        }
+      })
+    }
   }
 
   useEffect(() => {
@@ -118,7 +125,7 @@ function App() {
       setIsSetUp(true)
     }
 
-    if (eyeSquintLeft > 0.6 && mouthSmileLeft < 0.3) {
+    if (eyeSquintLeft > 0.6 && mouthSmileLeft < 0.3 && !isDone) {
       initAudio();
       // document.getElementById('staive').close()
       // document.getElementById('wakeup').showModal()
@@ -127,7 +134,7 @@ function App() {
       // document.getElementById('wakeup').close()
     }
 
-    if ((mouthPucker > 0.5 || browDownLeft > 0.3) && !cam) {
+    if ((mouthPucker > 0.5 || browDownLeft > 0.3) && !cam && !isDone) {
       document.getElementById('staive').showModal()
     }
 
@@ -135,7 +142,29 @@ function App() {
       document.getElementById('staive').close()
     }
 
-  }, [eyeSquintLeft, isSetUp]);
+  }, [eyeSquintLeft, isSetUp, mouthPucker, mouthSmileLeft, browDownLeft]);
+
+  useEffect(() => {
+    setInterval(() => {
+      tally(eyeSquintLeft, mouthSmileLeft, mouthPucker, browDownLeft)
+    }, 500);
+
+  }, [eyeSquintLeft, mouthSmileLeft, mouthPucker, browDownLeft])
+
+  function tally(eyeSquintLeft, mouthSmileLeft, mouthPucker, browDownLeft) {
+    let modStressed = browDownLeft * 3
+    let maximum = Math.max(eyeSquintLeft, mouthSmileLeft, mouthPucker, modStressed)
+
+    if (maximum === eyeSquintLeft) {
+      setTiredTally(tired => tired + 1)
+    } else if (maximum === mouthSmileLeft) {
+      setHappyTally(happy => happy + 1)
+    } else if (maximum === mouthPucker) {
+      setSadTally(sad => sad + 1)
+    } else {
+      setStressedTally(stressed => stressed + 1)
+    }
+  }
 
   const update = (saveNum) => {
     if (saveNum === "save1" && !save1) {
@@ -211,6 +240,15 @@ function App() {
     }
   }
 
+  function showFinalEmotions() {
+    console.log(stressedTally)
+    console.log(happyTally)
+    console.log(tiredTally)
+    console.log(sadTally)
+
+    document.getElementById('pie').showModal()
+  }
+
   return (
     <div className="containter">
       <div className="app-container">
@@ -225,7 +263,8 @@ function App() {
           <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></source>
         </audio>
         <div className="mt-3 pagination-container flex">
-          {isDone && <button className="btn mb-3 ml-6 w-fit btn-lg btn-warning">Submit</button>}
+          {isDone && <button className="btn mb-3 ml-6 w-fit btn-lg btn-warning"
+                             onClick={showFinalEmotions}>Submit</button>}
 
           <div className="join">
             <button onClick={() => selectQ1()}
@@ -240,6 +279,8 @@ function App() {
         </div>
 
         <StAIve/>
+
+        <Pie stressedTally={stressedTally} happyTally={happyTally} sadTally={sadTally} tiredTally={tiredTally}/>
 
         <div className="see-my-face-btn cam">
           <button className="btn" onClick={()=> {
