@@ -2,16 +2,16 @@ import React, {useState} from 'react'
 import '.././App.css'
 
 const Question3 = ({updateProgress}) => {
-  const[q3, setQ3] = useState(false);
+  // const[q3, saveQ3] = useState(false);
 
-  function update() {
-    if (q3 === true) {
-      console.log("hi");
-    } else {
-      updateProgress(25);
-      setQ3(true);
-    }
-  }
+  // function update() {
+  //   if (q3 === true) {
+  //     console.log("hi");
+  //   } else {
+  //     updateProgress(25);
+  //     saveQ3(true);
+  //   }
+  // }
 
   return (
     <div className="w-full">
@@ -23,7 +23,7 @@ const Question3 = ({updateProgress}) => {
         <h3 className="h3">This is the question</h3>
         <textarea className="textarea textarea-bordered w-full" placeholder="Answer question here"></textarea>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={update}>Save</button>
+            <button className="btn btn-primary" onClick={() => updateProgress("save3")}>Save</button>
           </div>
         </div>
         </div>
