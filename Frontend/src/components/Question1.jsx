@@ -11,7 +11,7 @@ const Question1 = ({updateProgress}) => {
       updateProgress(25);
       setQ1(true);
     }
-    //updateProgress(25);
+
   }
 
   return (
