@@ -16,8 +16,20 @@ function App() {
 
   const[progess, setProgress] = useState(0);
 
-  const update = (x) => {
-    setProgress(progress => progress + 25);
+  const[save1, setSave1] = useState(false);
+
+  const update = (saveNum) => {
+    if (saveNum === "save1" && !save1) {
+      setProgress(progress => progress + 25);
+      setSave1(true);
+    }
+    if (saveNum === "save2" && !save2) {
+      setProgress(progress => progress + 25);
+      setSave2(true);
+    } else if (saveNum === "save3" && !save3) {
+      setProgress(progress => progress + 25);
+      setSave3(true);
+    }  
     console.log("hello");
   } 
 

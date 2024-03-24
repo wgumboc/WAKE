@@ -2,17 +2,6 @@ import React, {useState} from 'react'
 
 const Question1 = ({updateProgress}) => {
 
-  const[q1, setQ1] = useState(false);
-
-  function update() {
-    if (q1 === true) {
-      console.log("hi");
-    } else {
-      updateProgress(25);
-      setQ1(true);
-    }
-    //updateProgress(25);
-  }
 
   return (
     <div className="w-full">
@@ -34,7 +23,7 @@ const Question1 = ({updateProgress}) => {
             </label>
           </div>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={update}>Save</button>
+            <button className="btn btn-primary" onClick={() => updateProgress("save1")}>Save</button>
           </div>
         </div>
       </div>
