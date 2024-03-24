@@ -1,9 +1,8 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 import './App.css'
 import Question1 from './components/Question1.jsx';
 import Question2 from './components/Question2.jsx';
 import Question3 from './components/Question3.jsx';
-import Cam from './Cam.jsx';
 import Question4 from "./components/Question4.jsx";
 import {FaceLandmarker, FilesetResolver} from "@mediapipe/tasks-vision";
 
@@ -57,6 +56,7 @@ function App() {
   const [mouthSmileLeft, setMouthSmileLeft] = useState(0);
   const [mouthPucker, setMouthPucker] = useState(0);
   const [eyeSquintLeft, setEyeSquintLeft] = useState(0);
+  const [browDownLeft, setBrowDownLeft] = useState(0);
 
   const[isSetUp, setIsSetUp] = useState(false);
 
@@ -67,7 +67,7 @@ function App() {
     // video = document.getElementById("video") as HTMLVideoElement;
     video = document.getElementById("video");
     navigator.mediaDevices.getUserMedia({
-      video: { width: 640, height: 360 },
+      video: { width: 1280, height: 720 },
       audio: false,
     }).then(function (stream) {
       video.srcObject = stream;
@@ -103,6 +103,10 @@ function App() {
       if (shape.categoryName === "eyeSquintLeft") {
         setEyeSquintLeft(shape.score)
       }
+
+      if (shape.categoryName === "browDownLeft") {
+        setBrowDownLeft(shape.score)
+      }
     })
   }
 
@@ -112,7 +116,7 @@ function App() {
       setIsSetUp(true)
     }
 
-    if (eyeSquintLeft > 0.6) {
+    if (eyeSquintLeft > 0.6 && mouthSmileLeft < 0.3) {
       initAudio();
     } else {
       pauseAudio();
@@ -184,10 +188,6 @@ function App() {
   }
 
   function selectCam() {
-    setQ1(false);
-    setQ2(false);
-    setQ3(false);
-    setQ4(false);
     showHideCam(true);
   }
 
@@ -199,8 +199,6 @@ function App() {
         {q2 && <Question2 updateProgress={update}/>}
         {q3 && <Question3 updateProgress={update}/>}
         {q4 && <Question4 updateProgress={update}/>}
-
-        {cam && <Cam/>}
 
         {/*Camera Component*/}
         <audio className="audioBtn">
@@ -221,14 +219,26 @@ function App() {
           </div>
         </div>
 
-        <div className="see-my-face-btn cam">
-            <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
-            <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
-            <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
-            <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
-            {eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}
 
-            <button onClick={() => selectCam()} className="btn w-fit">See my face!</button>
+
+        <div className="see-my-face-btn cam">
+          <button className="btn" onClick={()=> {
+            selectCam()
+            document.getElementById('my_modal_2').showModal()
+            }}>Diagnostics</button>
+          <dialog id="my_modal_2" className="modal">
+            <div className="modal-box">
+              <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
+              <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
+              <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
+              <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
+              <div>{"Stressed: " + browDownLeft.toFixed(3)}</div>
+              {/*{eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}*/}
+            </div>
+            <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
         </div>
       </div>
     </div>
