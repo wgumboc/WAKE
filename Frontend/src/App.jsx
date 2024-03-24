@@ -69,7 +69,7 @@ function App() {
         <Navbar></Navbar>
         {q1 && <Question1 updateProgress={update}/>}
         {q2 && <Question2 updateProgress={update}/>}
-        {q3 && <Question3/>}
+        {q3 && <Question3 updateProgress={update}/>}
         {q4 && <Question4/>}
         <progress className="progress progress-secondary w-full" value={progess} max="100">
         </progress>
