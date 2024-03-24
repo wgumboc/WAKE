@@ -1,14 +1,14 @@
 # WAKE
 
 ## Inspiration
-Have you ever found yourself drifting off during a Zoom lecture or struggling to stay awake while completing assignments? What about stressing out to get your code to run smoothly? We have all experienced those moments when our energy dips, and our productivity plummets.
+Inspired by previous degrees in psychology and media studies, our team tackled combining our dev skills with our past studies to improve online learning experiences. Have you ever found yourself drifting off during a Zoom lecture or struggling to stay awake while completing assignments? What about stressing out to get your code to run smoothly? We have all experienced those moments when our energy dips, and our productivity plummets. 
 
 ## What it does
 Our WAKE detects your emotions to keep your mood happy and ensure you stay alert and focused throughout your online learning experience. With the assistance of our virtual coach,  StAIve, you will receive friendly reminders to keep smiling, enhancing your overall engagement and productivity.
 
 ## How we built it
 - we used Google's mediapipe for the facial recognition
-- React and Vite for the website and its components
+- React and Vite for the website and its components (in addition to Javascript, CSS, HTML)
 
 ## Challenges we ran into
 - detecting the emotions that we want it to detect (and the sensitivity/accuracy of the detection)
