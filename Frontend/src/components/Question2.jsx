@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Question2 = () => {
+const Question2 = ({updateProgress}) => {
+
+  function update() {
+    updateProgress(25);
+  }
+
   return (
     <div className="w-full">
       <div className="card bg-base-100 shadow-xl">
@@ -33,7 +38,7 @@ const Question2 = () => {
         </label>
       </div>
           <div className="card-actions justify-end">
-          <button className="btn btn-active btn-primary">Save</button>
+          <button className="btn btn-active btn-primary" onClick={update}>Save</button>
           </div>
         </div>
       </div>

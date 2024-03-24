@@ -56,7 +56,7 @@ function App() {
       <div className="app-container">
         <Navbar></Navbar>
         {q1 && <Question1 updateProgress={update}/>}
-        {q2 && <Question2/>}
+        {q2 && <Question2 updateProgress={update}/>}
         {q3 && <Question3/>}
         {q4 && <Question4/>}
         <progress className="progress progress-secondary w-full" value={progess} max="100">
