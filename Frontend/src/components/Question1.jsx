@@ -1,6 +1,25 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 
-const Question1 = ({updateProgress}) => {
+const Question1 = ({updateProgress, mouthPucker}) => {
+
+  // const [state, setState] = useState(1);
+
+  // function mouseOver() {
+  //   if (state === 1) {
+  //     setState((prevVal) => (prevVal += 1));
+  //   } else if (state === 2) {
+  //     setState((prevVal) => (prevVal += 1));
+  //   } else if (state === 3) {
+  //     setState((prevVal) => (prevVal -= 2));
+  //   }
+  // }
+
+  // let mystyle = {
+  //   left: state === 1 ? "0px" : state === 2 ? "200px" : state === 3 ? "450px" : "",
+  //
+  //   position: 1 < 8 && "absolute",
+  // };
+
   return (
     <div className="w-full flex justify-between pt-24">
      
@@ -25,8 +44,13 @@ const Question1 = ({updateProgress}) => {
             </label>
     
 
-            <div className="card-actions justify-end">
-              <button className="btn btn-lg btn-warning float-right" onClick={() => updateProgress("save1")}>Save</button>
+            <div className="card-actions justify-end" id="save1">
+              {/*<button className="btn btn-lg btn-warning float-right"*/}
+              {/*        onClick={() => updateProgress("save1")}*/}
+              {/*        onMouseOver={mouseOver}*/}
+              {/*        style={mystyle}>Save</button>*/}
+              <button className="btn btn-lg btn-warning float-right"
+                      onClick={() => updateProgress("save1")}>Save</button>
             </div>
           </div>
           </div>

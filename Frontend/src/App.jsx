@@ -1,5 +1,4 @@
-import {useEffect, useState} from 'react'
-import Navbar from "./components/Navbar.jsx";
+import {useEffect, useRef, useState} from 'react'
 import './App.css'
 import Question1 from './components/Question1.jsx';
 import Question2 from './components/Question2.jsx';
@@ -27,6 +26,17 @@ const options = {
 }
 
 function App() {
+
+  let initAudio = () => {
+    const targetAudio = document.getElementsByClassName("audioBtn")[0];
+    targetAudio.play();
+  }
+
+  let pauseAudio = () => {
+    const targetAudio = document.getElementsByClassName("audioBtn")[0];
+    targetAudio.pause();
+  }
+
   const[q1, setQ1] = useState(true);
   const[q2, setQ2] = useState(false);
   const[q3, setQ3] = useState(false);
@@ -47,6 +57,8 @@ function App() {
   const [mouthSmileLeft, setMouthSmileLeft] = useState(0);
   const [mouthPucker, setMouthPucker] = useState(0);
   const [eyeSquintLeft, setEyeSquintLeft] = useState(0);
+
+  const[isSetUp, setIsSetUp] = useState(false);
 
   const setup = async () => {
     const filesetResolver = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm");
@@ -95,15 +107,24 @@ function App() {
   }
 
   useEffect(() => {
-    setup();
-  }, []);
+    if (!isSetUp) {
+      setup();
+      setIsSetUp(true)
+    }
+
+    if (eyeSquintLeft > 0.6) {
+      initAudio();
+    } else {
+      pauseAudio();
+    }
+  }, [eyeSquintLeft, isSetUp]);
 
   const update = (saveNum) => {
     if (saveNum === "save1" && !save1) {
       setProgress(progress => progress + 25);
       setSave1(true);
       checkIfDone();
-    } 
+    }
     if (saveNum === "save2" && !save2) {
       setProgress(progress => progress + 25);
       setSave2(true);
@@ -116,14 +137,14 @@ function App() {
       setProgress(progress => progress + 25);
       setSave4(true);
       checkIfDone();
-    }  
+    }
     console.log("hello");
   } 
 
   const checkIfDone = () => {
-    if ((save1 && save2 && save3) || 
-    (save1 && save2 && save4) || 
-    (save1 && save3 && save4) || 
+    if ((save1 && save2 && save3) ||
+    (save1 && save2 && save4) ||
+    (save1 && save3 && save4) ||
     (save2 && save3 && save4)) {
       setIsDone(true);
     }
@@ -173,27 +194,21 @@ function App() {
   return (
     <div className="containter">
       <div className="app-container">
-      <progress className="progress progress-secondary w-full" value={progess} max="100"></progress>
-         {/* <Navbar></Navbar> */}
-        {q1 && <Question1 updateProgress={update}/>}
+        <progress className="progress progress-secondary w-full" value={progess} max="100"></progress>
+        {q1 && <Question1 updateProgress={update} mouthPucker={mouthPucker}/>}
         {q2 && <Question2 updateProgress={update}/>}
         {q3 && <Question3 updateProgress={update}/>}
-
         {q4 && <Question4 updateProgress={update}/>}
 
- 
         {cam && <Cam/>}
 
-
+        {/*Camera Component*/}
+        <audio className="audioBtn">
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></source>
+        </audio>
         <div className="mt-3 pagination-container flex">
-        
-        
-        {isDone && <button className="btn mb-3 ml-6 w-fit btn-lg btn-warning">Submit</button>}
+          {isDone && <button className="btn mb-3 ml-6 w-fit btn-lg btn-warning">Submit</button>}
 
-  
-
-
-        
           <div className="join">
             <button onClick={() => selectQ1()}
                     className={q1 === true ? "join-item btn btn-active" : "join-item btn"}>1</button>
@@ -204,28 +219,18 @@ function App() {
             <button onClick={() => selectQ4()}
                     className={q4 === true ? "join-item btn btn-active" : "join-item btn"}>4</button>
           </div>
-       
-
-      
-
-        
-      </div>
-
-      <div className="see-my-face-btn">
-          <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
-          <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
-          <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
-          <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
-          {eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}
-
-          <button onClick={() => selectCam()} className="btn w-fit">See my face!</button>
         </div>
 
-     
+        <div className="see-my-face-btn cam">
+            <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
+            <div>{"Smiling: " + mouthSmileLeft.toFixed(3)}</div>
+            <div>{"Sad: " + mouthPucker.toFixed(3)}</div>
+            <div>{"Tired: " + eyeSquintLeft.toFixed(3)}</div>
+            {eyeSquintLeft > 0.6 && <div className="asleep">WAKE UP</div>}
 
-      
-
-    </div>
+            <button onClick={() => selectCam()} className="btn w-fit">See my face!</button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -79,10 +79,10 @@ body {
 .pagination-container {
   margin-top: auto;
   width: 100%;
-  position: fixed; 
-  bottom: 30px; 
-  left: 45%; 
-  padding: 10px 0; 
+  position: fixed;
+  bottom: 30px;
+  left: 45%;
+  padding: 10px 0;
   flex-direction: column;
 }
 
@@ -100,4 +100,8 @@ body {
 .cam {
 
     /*z-index: -1;*/
+}
+
+.btn {
+    transition: 0.2s;
 }
