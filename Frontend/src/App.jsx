@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react'
 import Navbar from "./components/Navbar.jsx";
 import './App.css'
 import Question1 from './components/Question1.jsx';
 import Question2 from './components/Question2.jsx';
 import Question3 from './components/Question3.jsx';
-import Question4 from './components/Question4.jsx';
+// import Question4 from './components/Question4.jsx';
+import Cam from './Cam.jsx';
+import Question4 from "./components/Question4.jsx";
 
 function App() {
   const[q1, setQ1] = useState(false);
   const[q2, setQ2] = useState(false);
   const[q3, setQ3] = useState(true);
   const[q4, setQ4] = useState(false);
+  const[cam, setCam] = useState(false);
 
   const[progess, setProgress] = useState(0);
 
@@ -41,6 +42,7 @@ function App() {
     setQ2(false);
     setQ3(false);
     setQ4(false);
+    setCam(false);
   }
 
   function selectQ2() {
@@ -48,6 +50,7 @@ function App() {
     setQ2(true);
     setQ3(false);
     setQ4(false);
+    setCam(false);
   }
 
   function selectQ3() {
@@ -55,6 +58,7 @@ function App() {
     setQ2(false);
     setQ3(true);
     setQ4(false);
+    setCam(false);
   }
 
   function selectQ4() {
@@ -62,19 +66,29 @@ function App() {
     setQ2(false);
     setQ3(false);
     setQ4(true);
-    console.log(q4)
+    setCam(false);
+  }
+
+  function selectCam() {
+    setQ1(false);
+    setQ2(false);
+    setQ3(false);
+    setQ4(false);
+    setCam(true);
   }
 
   return (
-    <>
+    <div className="">
       <div className="app-container">
-        <Navbar></Navbar>
+         {/* <Navbar></Navbar> */}
         {q1 && <Question1 updateProgress={update}/>}
         {q2 && <Question2 updateProgress={update}/>}
         {q3 && <Question3 updateProgress={update}/>}
         {q4 && <Question4/>}
         <progress className="progress progress-secondary w-full" value={progess} max="100">
         </progress>
+ 
+        {cam && <Cam/>}
         <div>
           <div className="join">
             <button onClick={() => selectQ1()}
@@ -87,9 +101,12 @@ function App() {
                     className={q4 === true ? "join-item btn btn-active" : "join-item btn"}>4</button>
           </div>
         </div>
+        <button onClick={() => selectCam()} className="btn">See my face!</button>
       </div>
       
     </>
+
+    </div>
   )
 }
 
