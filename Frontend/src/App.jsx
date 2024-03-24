@@ -103,8 +103,6 @@ function App() {
         </div>
         <button onClick={() => selectCam()} className="btn">See my face!</button>
       </div>
-      
-    </>
 
     </div>
   )
