@@ -9,12 +9,18 @@ import Question3 from './components/Question3.jsx';
 import Question4 from './components/Question4.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   const[q1, setQ1] = useState(false);
   const[q2, setQ2] = useState(false);
   const[q3, setQ3] = useState(true);
   const[q4, setQ4] = useState(false);
+
+  const[progess, setProgress] = useState(0)
+
+  const update = (x) => {
+    setProgress(x);
+    console.log("hello");
+  } 
+
 
   function selectQ1() {
     setQ1(true);
@@ -49,10 +55,12 @@ function App() {
     <>
       <div className="app-container">
         <Navbar></Navbar>
-        {q1 && <Question1/>}
+        {q1 && <Question1 updateProgress={update}/>}
         {q2 && <Question2/>}
         {q3 && <Question3/>}
         {q4 && <Question4/>}
+        <progress className="progress progress-secondary w-full" value={0} max="100">
+        </progress>
         <div>
           <div className="join">
             <button onClick={() => selectQ1()}
@@ -66,6 +74,7 @@ function App() {
           </div>
         </div>
       </div>
+      
     </>
   )
 }
