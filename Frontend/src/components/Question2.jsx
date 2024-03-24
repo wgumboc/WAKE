@@ -33,7 +33,7 @@ const Question2 = () => {
         </label>
       </div>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Save</button>
+          <button className="btn btn-active btn-primary">Save</button>
           </div>
         </div>
       </div>
