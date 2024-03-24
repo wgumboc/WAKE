@@ -26,3 +26,7 @@ Our WAKE detects your emotions to keep your mood happy and ensure you stay alert
 
 ## What's next for WAKE
 We think there are a lot of implications and use in the future (such as detecting if a student is taking the test/reacting to the test elements in an online setting) and we hope to be able to add more functionality like an inspiriational quotes with staIve.
+
+## Demo/Explanation Video
+
+https://youtu.be/mV_Gl3WyEu0
