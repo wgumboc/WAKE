@@ -3,7 +3,7 @@ import React from 'react'
 const Question1 = ({updateProgress}) => {
 
   function update() {
-    updateProgress(1);
+    updateProgress(25);
   }
 
   return (

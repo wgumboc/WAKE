@@ -59,7 +59,7 @@ function App() {
         {q2 && <Question2/>}
         {q3 && <Question3/>}
         {q4 && <Question4/>}
-        <progress className="progress progress-secondary w-full" value={0} max="100">
+        <progress className="progress progress-secondary w-full" value={progess} max="100">
         </progress>
         <div>
           <div className="join">
