@@ -7,6 +7,7 @@ import Question4 from "./components/Question4.jsx";
 import {FaceLandmarker, FilesetResolver} from "@mediapipe/tasks-vision";
 import StAIve from "./components/StAIve.jsx";
 import Pie from "./components/Pie.jsx";
+import CamModal from "./components/CamModal.jsx";
 
 
 
@@ -127,11 +128,8 @@ function App() {
 
     if (eyeSquintLeft > 0.6 && mouthSmileLeft < 0.3 && !isDone) {
       initAudio();
-      // document.getElementById('staive').close()
-      // document.getElementById('wakeup').showModal()
     } else {
       pauseAudio();
-      // document.getElementById('wakeup').close()
     }
 
     if ((mouthPucker > 0.5 || browDownLeft > 0.3) && !cam && !isDone) {
@@ -232,20 +230,15 @@ function App() {
 
   function selectCam() {
     if (!cam) {
-      document.getElementById('my_modal_2').showModal()
+      document.getElementById('cam-modal').showModal()
       showHideCam(true);
     } else {
-      document.getElementById('my_modal_2').close()
+      document.getElementById('cam-modal').close()
       showHideCam(false);
     }
   }
 
   function showFinalEmotions() {
-    console.log(stressedTally)
-    console.log(happyTally)
-    console.log(tiredTally)
-    console.log(sadTally)
-
     document.getElementById('pie').showModal()
   }
 
@@ -280,45 +273,21 @@ function App() {
 
         <StAIve/>
 
-        <Pie stressedTally={stressedTally} happyTally={happyTally} sadTally={sadTally} tiredTally={tiredTally}/>
+        <Pie stressedTally={stressedTally}
+             happyTally={happyTally}
+             sadTally={sadTally}
+             tiredTally={tiredTally}/>
 
-        <div className="see-my-face-btn cam">
-          <button className="btn" onClick={()=> {
-            selectCam()
-            }}>Diagnostics</button>
-          <dialog id="my_modal_2" className="modal">
-            <div className="modal-box">
-              <video hidden={!cam} className='camera-feed' id="video" autoPlay></video>
-              <div className="emotion-bar">
-                <span className="emotion-label">{"Smiling: " + mouthSmileLeft.toFixed(3)}</span>
-                <span className="emotion-color" style={{
-                  width: `calc(${mouthSmileLeft * 100}% - 120px)`
-                }}></span>
-              </div>
-              <div className="emotion-bar">
-                <span className="emotion-label">{"Sad: " + mouthPucker.toFixed(3)}</span>
-                <span className="emotion-color" style={{
-                  width: `calc(${mouthPucker * 100}% - 120px)`
-                }}></span>
-              </div>
-              <div className="emotion-bar">
-                <span className="emotion-label">{"Tired: " + eyeSquintLeft.toFixed(3)}</span>
-                <span className="emotion-color" style={{
-                  width: `calc(${eyeSquintLeft * 100}% - 120px)`
-                }}></span>
-              </div>
-              <div className="emotion-bar">
-                <span className="emotion-label">{"Stressed: " + browDownLeft.toFixed(3)}</span>
-                <span className="emotion-color" style={{
-                  width: `calc(${browDownLeft * 100}% - 120px)`
-                }}></span>
-              </div>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              <button onClick={() => {selectCam()}}>close</button>
-            </form>
-          </dialog>
-        </div>
+        <CamModal cam={cam}
+                  mouthSmileLeft={mouthSmileLeft}
+                  mouthPucker={mouthPucker}
+                  eyeSquintLeft={eyeSquintLeft}
+                  browDownLeft={browDownLeft}
+                  selectCam={selectCam}
+                  stressedTally={stressedTally}
+                  happyTally={happyTally}
+                  sadTally={sadTally}
+                  tiredTally={tiredTally}/>
       </div>
     </div>
   )
